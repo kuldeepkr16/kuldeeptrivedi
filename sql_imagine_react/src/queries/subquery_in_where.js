@@ -15,23 +15,30 @@ WHERE s.id IN (
     const students = await getStudents();
     const marks = await getMarks();
     
-    // Calculate average marks
-    const totalMarks = marks.reduce((sum, mark) => sum + mark.marks, 0);
+    // Calculate average marks (parse as numbers)
+    const totalMarks = marks.reduce((sum, mark) => sum + parseFloat(mark.marks), 0);
     const avgMarks = totalMarks / marks.length;
     
     // Find students with marks above average
     const highScoringIds = new Set(
       marks
-        .filter(mark => mark.marks > avgMarks)
-        .map(mark => mark.student_id)
+        .filter(mark => parseFloat(mark.marks) > avgMarks)
+        .map(mark => mark.student_id.toString())  // Convert to string for consistent comparison
     );
     
-    return students
-      .filter(student => highScoringIds.has(student.id))
+    // Filter students and format output
+    const results = students
+      .filter(student => highScoringIds.has(student.id.toString()))  // Convert to string for comparison
       .map(student => ({
-        name: student.name,
-        grade: student.grade
+        NAME: student.name,
+        GRADE: student.grade
       }));
+    
+    console.log('Average marks:', avgMarks);
+    console.log('High scoring IDs:', [...highScoringIds]);
+    console.log('Results:', results);
+    
+    return results;
   },
-  columns: ['name', 'grade']
+  columns: ['NAME', 'GRADE']
 }; 

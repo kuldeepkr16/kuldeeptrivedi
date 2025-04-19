@@ -5,9 +5,9 @@ export const case_marks_grade_query = {
   description: "Uses CASE statements to categorize marks into letter grades and shows student performance by subject.",
   sql: `
     SELECT 
-      Students.name,
-      Marks.subject,
-      Marks.marks,
+      Students.name as NAME,
+      Marks.subject as SUBJECT,
+      Marks.marks as MARKS,
       CASE 
         WHEN marks >= 90 THEN 'A+'
         WHEN marks >= 80 THEN 'A'
@@ -15,7 +15,7 @@ export const case_marks_grade_query = {
         WHEN marks >= 60 THEN 'C'
         WHEN marks >= 50 THEN 'D'
         ELSE 'F'
-      END as letter_grade
+      END as LETTER_GRADE
     FROM Students
     INNER JOIN Marks ON Students.id = Marks.student_id
     ORDER BY Students.name, Marks.subject;
@@ -28,27 +28,38 @@ export const case_marks_grade_query = {
     This is a common pattern in educational systems for converting numerical scores to letter grades.
   `,
   result: async () => {
-    const students = await getStudents();
-    const marks = await getMarks();
-    
-    // Join students and marks, then add letter grades
-    return marks.map(mark => {
-      const student = students.find(s => s.id === mark.student_id);
-      let letterGrade;
-      if (mark.marks >= 90) letterGrade = 'A+';
-      else if (mark.marks >= 80) letterGrade = 'A';
-      else if (mark.marks >= 70) letterGrade = 'B';
-      else if (mark.marks >= 60) letterGrade = 'C';
-      else if (mark.marks >= 50) letterGrade = 'D';
-      else letterGrade = 'F';
+    try {
+      const students = await getStudents();
+      const marks = await getMarks();
       
-      return {
-        name: student ? student.name : 'Unknown',
-        subject: mark.subject,
-        marks: mark.marks,
-        letter_grade: letterGrade
-      };
-    }).sort((a, b) => a.name.localeCompare(b.name) || a.subject.localeCompare(b.subject));
+      // Join students and marks, then add letter grades
+      return marks.map(mark => {
+        const student = students.find(s => s.id.toString() === mark.student_id.toString());
+        const numericMark = parseFloat(mark.marks);
+        
+        let letterGrade;
+        if (numericMark >= 90) letterGrade = 'A+';
+        else if (numericMark >= 80) letterGrade = 'A';
+        else if (numericMark >= 70) letterGrade = 'B';
+        else if (numericMark >= 60) letterGrade = 'C';
+        else if (numericMark >= 50) letterGrade = 'D';
+        else letterGrade = 'F';
+        
+        return {
+          NAME: student ? student.name : 'Unknown',
+          SUBJECT: mark.subject,
+          MARKS: numericMark,
+          LETTER_GRADE: letterGrade
+        };
+      })
+      .sort((a, b) => 
+        a.NAME.localeCompare(b.NAME) || 
+        a.SUBJECT.localeCompare(b.SUBJECT)
+      );
+    } catch (error) {
+      console.error('Error in case_marks_grade_query:', error);
+      return [];
+    }
   },
-  columns: ['name', 'subject', 'marks', 'letter_grade']
+  columns: ['NAME', 'SUBJECT', 'MARKS', 'LETTER_GRADE']
 }; 
