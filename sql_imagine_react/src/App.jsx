@@ -140,8 +140,17 @@ const StaticTable = ({ data, columns, title }) => {
   }, [data]);
 
   return (
-    <Box sx={{ mb: 4, px: 3 }}>
-      <Typography variant="h6" sx={{ color: '#fff', mb: 2 }}>
+    <Box sx={{ mb: 2 }}>
+      <Typography 
+        variant="h6" 
+        sx={{ 
+          color: '#fff', 
+          mb: 1,
+          pl: 1,
+          fontSize: '1rem',
+          fontWeight: 'bold'
+        }}
+      >
         {title}
       </Typography>
       <TableContainer 
@@ -149,25 +158,38 @@ const StaticTable = ({ data, columns, title }) => {
         className="table-responsive"
         sx={{ 
           backgroundColor: '#1a1a1a',
-          height: 'calc(100% - 40px)',
-          maxHeight: '600px',
+          maxHeight: '300px',
           overflow: 'auto',
           borderRadius: '8px',
           border: '1px solid #404040',
           '& .MuiTable-root': {
             borderCollapse: 'separate',
             borderSpacing: 0,
+          },
+          '&::-webkit-scrollbar': {
+            width: '8px',
+            height: '8px'
+          },
+          '&::-webkit-scrollbar-track': {
+            background: '#1a1a1a'
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#4fc3f7',
+            borderRadius: '4px',
+            '&:hover': {
+              background: '#81d4fa'
+            }
           }
         }}
       >
-        <Table className="table table-dark table-striped table-hover">
+        <Table stickyHeader className="table table-dark table-striped table-hover">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column}
                   sx={{
-                    backgroundColor: '#121212',
+                    backgroundColor: '#121212 !important',
                     color: '#4fc3f7',
                     fontWeight: 'bold',
                     textTransform: 'uppercase',
@@ -177,7 +199,7 @@ const StaticTable = ({ data, columns, title }) => {
                     whiteSpace: 'nowrap',
                     position: 'sticky',
                     top: 0,
-                    zIndex: 1
+                    zIndex: 2
                   }}
                 >
                   {column}
@@ -219,6 +241,7 @@ const StaticTable = ({ data, columns, title }) => {
                         borderRight: '1px solid #404040',
                         padding: '8px 16px',
                         fontSize: '0.875rem',
+                        backgroundColor: '#1a1a1a',
                         '&:last-child': {
                           borderRight: 'none'
                         }
@@ -588,9 +611,10 @@ const SQLView = ({ queries, currentQueryIndex, setCurrentQueryIndex }) => {
       width: '100%', 
       maxWidth: 'none',
       margin: 0,
-      padding: 0
+      padding: 0,
+      mt: { xs: 0, md: 1 }
     }}>
-      <Grid container spacing={0} sx={{ 
+      <Grid container spacing={2} sx={{ 
         width: '100%',
         margin: 0
       }}>
@@ -602,11 +626,11 @@ const SQLView = ({ queries, currentQueryIndex, setCurrentQueryIndex }) => {
           <Box sx={{ 
             display: 'flex', 
             flexDirection: 'column', 
-            gap: 4, 
-            pl: { xs: 2, md: 3 }, 
-            pr: { xs: 2, md: 2 },
+            gap: 2, 
+            pl: { xs: 1, md: 2 }, 
+            pr: { xs: 1, md: 1 },
             width: '100%',
-            mt: { xs: 4, md: 0 }
+            mt: { xs: 0, md: 0 }
           }}>
             <StaticTable
               title="Students Table"
@@ -634,9 +658,10 @@ const SQLView = ({ queries, currentQueryIndex, setCurrentQueryIndex }) => {
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            pr: { xs: 2, md: 3 },
-            pl: { xs: 2, md: 0 },
-            flex: 1
+            pr: { xs: 1, md: 2 },
+            pl: { xs: 1, md: 0 },
+            flex: 1,
+            mt: { xs: 0, md: 0 }
           }}>
             <Box 
               sx={{ 
@@ -809,12 +834,18 @@ const App = () => {
           showSidebarToggle={isSQLPage}
         />
 
-        <Box sx={{ height: { xs: '56px', md: '64px' } }} />
+        <Box sx={{ 
+          height: { xs: '48px', md: '56px' },
+          width: '100%',
+          flexShrink: 0
+        }} />
 
         <Box sx={{ 
           flex: 1,
           position: 'relative',
-          display: 'flex'
+          display: 'flex',
+          width: '100%',
+          pt: { xs: 0, md: 1 }
         }}>
           {isSQLPage && (
             <Sidebar 
@@ -834,9 +865,9 @@ const App = () => {
               maxWidth: 'none !important',
               position: 'relative',
               zIndex: 1100,
-              py: { xs: 2, md: 4 },
+              py: { xs: 0, md: 1 },
               display: 'flex',
-              justifyContent: 'flex-start',
+              flexDirection: 'column',
               px: '0 !important'
             }}
           >

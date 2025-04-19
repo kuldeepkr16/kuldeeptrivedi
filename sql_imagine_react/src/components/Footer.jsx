@@ -14,7 +14,7 @@ const Footer = () => {
       }}
     >
       <Typography variant="body2" color="text.secondary" align="center">
-        © {new Date().getFullYear()} SQL Imagine
+        © {new Date().getFullYear()} Engineer The Data
       </Typography>
     </Box>
   );
