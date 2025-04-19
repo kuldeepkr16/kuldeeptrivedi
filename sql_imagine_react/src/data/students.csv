@@ -1,6 +1,6 @@
-id,name,age,grade
-1,John Doe,20,A
-2,Jane Smith,21,B
-3,Alice Johnson,19,A
-4,Bob Wilson,22,C
-5,Emily Brown,20,B 
+id,name,age,grade,department_id
+1,John Doe,20,A,1
+2,Jane Smith,21,B,2
+3,Alice Johnson,19,A,1
+4,Bob Wilson,22,C,3
+5,Emily Brown,20,B,2 

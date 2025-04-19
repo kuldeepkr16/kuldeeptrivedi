@@ -1,23 +1,21 @@
 import Papa from 'papaparse';
 
-export const loadCSVData = async (filename) => {
-  try {
-    const response = await fetch(`/src/data/${filename}`);
-    const csvText = await response.text();
-    const { data } = Papa.parse(csvText, {
-      header: true,
-      skipEmptyLines: true
-    });
-    return data;
-  } catch (error) {
-    return [];
-  }
+// Import CSV files
+import studentsData from '../data/students.csv?raw';
+import marksData from '../data/marks.csv?raw';
+
+const parseCSV = (csvText) => {
+  const { data } = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true
+  });
+  return data;
 };
 
 export const getStudents = async () => {
-  return await loadCSVData('students.csv');
+  return parseCSV(studentsData);
 };
 
 export const getMarks = async () => {
-  return await loadCSVData('marks.csv');
+  return parseCSV(marksData);
 }; 
