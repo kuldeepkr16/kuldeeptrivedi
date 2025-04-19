@@ -1,0 +1,12 @@
+Welcome to SQL Query Explorer!
+
+This interactive tool is designed to help you learn and practice SQL queries in a hands-on way. Our platform provides a safe environment to experiment with different SQL commands and see their results in real-time.
+
+Features:
+- Interactive query execution
+- Real-time results
+- Detailed explanations
+- Sample database tables
+- Step-by-step learning
+
+Whether you're a beginner or looking to refresh your SQL skills, this tool is perfect for you! 

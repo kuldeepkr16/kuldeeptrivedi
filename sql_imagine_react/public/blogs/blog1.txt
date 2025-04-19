@@ -1,0 +1,21 @@
+Understanding SQL Basics: A Beginner's Guide
+
+SQL (Structured Query Language) is the standard language for managing and manipulating databases. In this blog post, we'll cover the fundamental concepts that every SQL beginner should know.
+
+Key Concepts:
+1. SELECT Statement
+   - Basic syntax
+   - Column selection
+   - Using aliases
+
+2. WHERE Clause
+   - Filtering data
+   - Comparison operators
+   - Logical operators
+
+3. JOIN Operations
+   - INNER JOIN
+   - LEFT JOIN
+   - RIGHT JOIN
+
+Stay tuned for more in-depth tutorials on each of these topics! 
