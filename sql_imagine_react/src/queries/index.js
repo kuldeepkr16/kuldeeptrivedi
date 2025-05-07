@@ -41,6 +41,16 @@ import { stored_procedure_example_query } from './stored_procedure_example';
 import { function_example_query } from './function_example';
 import { table_valued_function_example_query } from './table_valued_function_example';
 import { trigger_example_query } from './trigger_example';
+import { permissions_example_query } from './permissions_example';
+import { explain_analyze_example_query } from './explain_analyze_example';
+import { optimizing_query_example_query } from './optimizing_query_example';
+import { query_execution_order_example_query } from './query_execution_order_example';
+import { temporary_table_example_query } from './temporary_table_example';
+import { json_functions_example_query } from './json_functions_example';
+import { array_functions_example_query } from './array_functions_example';
+import { recursive_cte_example_query } from './recursive_cte_example';
+import { error_handling_example_query } from './error_handling_example';
+import { query_optimization_example_query } from './query_optimization_example';
 
 // All queries in flat structure
 const all_queries = [
@@ -143,7 +153,37 @@ const all_queries = [
   table_valued_function_example_query,
 
   // TRIGGER example
-  trigger_example_query
+  trigger_example_query,
+
+  // PERMISSIONS example
+  permissions_example_query,
+
+  // EXPLAIN/ANALYZE example
+  explain_analyze_example_query,
+
+  // OPTIMIZING QUERIES example
+  optimizing_query_example_query,
+
+  // QUERY EXECUTION ORDER example
+  query_execution_order_example_query,
+
+  // TEMPORARY TABLE example
+  temporary_table_example_query,
+
+  // JSON FUNCTIONS example
+  json_functions_example_query,
+
+  // ARRAY FUNCTIONS example
+  array_functions_example_query,
+
+  // RECURSIVE CTE example
+  recursive_cte_example_query,
+
+  // ERROR HANDLING example
+  error_handling_example_query,
+
+  // QUERY OPTIMIZATION example
+  query_optimization_example_query
 ];
 
 // Get ordered list of queries
