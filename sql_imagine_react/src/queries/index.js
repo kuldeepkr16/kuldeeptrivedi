@@ -51,6 +51,13 @@ import { array_functions_example_query } from './array_functions_example';
 import { recursive_cte_example_query } from './recursive_cte_example';
 import { error_handling_example_query } from './error_handling_example';
 import { query_optimization_example_query } from './query_optimization_example';
+import { advanced_index_example_query } from './advanced_index_example';
+import { advanced_permissions_example_query } from './advanced_permissions_example';
+import { advanced_error_handling_example_query } from './advanced_error_handling_example';
+import { advanced_data_types_example_query } from './advanced_data_types_example';
+import { advanced_query_optimization_example_query } from './advanced_query_optimization_example';
+import { advanced_window_functions_example_query } from './advanced_window_functions_example';
+import { advanced_cte_example_query } from './advanced_cte_example';
 
 // All queries in flat structure
 const all_queries = [
@@ -183,7 +190,28 @@ const all_queries = [
   error_handling_example_query,
 
   // QUERY OPTIMIZATION example
-  query_optimization_example_query
+  query_optimization_example_query,
+
+  // ADVANCED INDEX example
+  advanced_index_example_query,
+
+  // ADVANCED PERMISSIONS example
+  advanced_permissions_example_query,
+
+  // ADVANCED ERROR HANDLING example
+  advanced_error_handling_example_query,
+
+  // ADVANCED DATA TYPES example
+  advanced_data_types_example_query,
+
+  // ADVANCED QUERY OPTIMIZATION example
+  advanced_query_optimization_example_query,
+
+  // ADVANCED WINDOW FUNCTIONS example
+  advanced_window_functions_example_query,
+
+  // ADVANCED CTE example
+  advanced_cte_example_query
 ];
 
 // Get ordered list of queries
