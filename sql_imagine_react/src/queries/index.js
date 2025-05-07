@@ -21,6 +21,14 @@ import { window_rank_over_query } from './window_rank_over';
 import { window_dense_rank_query } from './window_dense_rank';
 import { window_rank_comparison_query } from './window_rank_comparison';
 import { case_marks_grade_query } from './case_marks_grade';
+import { insert_into_example_query } from './insert_into_example';
+import { update_example_query } from './update_example';
+import { delete_example_query } from './delete_example';
+import { create_table_example_query } from './create_table_example';
+import { alter_table_example_query } from './alter_table_example';
+import { drop_table_example_query } from './drop_table_example';
+import { primary_key_example_query } from './primary_key_example';
+import { foreign_key_example_query } from './foreign_key_example';
 
 // All queries in flat structure
 const all_queries = [
@@ -63,7 +71,31 @@ const all_queries = [
   window_rank_comparison_query,
 
   // CASE statement examples
-  case_marks_grade_query
+  case_marks_grade_query,
+
+  // INSERT INTO example
+  insert_into_example_query,
+
+  // UPDATE example
+  update_example_query,
+
+  // DELETE example
+  delete_example_query,
+
+  // CREATE TABLE example
+  create_table_example_query,
+
+  // ALTER TABLE example
+  alter_table_example_query,
+
+  // DROP TABLE example
+  drop_table_example_query,
+
+  // PRIMARY KEY example
+  primary_key_example_query,
+
+  // FOREIGN KEY example
+  foreign_key_example_query
 ];
 
 // Get ordered list of queries
