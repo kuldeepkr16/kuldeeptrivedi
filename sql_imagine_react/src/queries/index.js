@@ -29,6 +29,18 @@ import { alter_table_example_query } from './alter_table_example';
 import { drop_table_example_query } from './drop_table_example';
 import { primary_key_example_query } from './primary_key_example';
 import { foreign_key_example_query } from './foreign_key_example';
+import { unique_constraint_example_query } from './unique_constraint_example';
+import { not_null_constraint_example_query } from './not_null_constraint_example';
+import { check_constraint_example_query } from './check_constraint_example';
+import { create_index_example_query } from './create_index_example';
+import { unique_index_example_query } from './unique_index_example';
+import { transaction_example_query } from './transaction_example';
+import { view_example_query } from './view_example';
+import { materialized_view_example_query } from './materialized_view_example';
+import { stored_procedure_example_query } from './stored_procedure_example';
+import { function_example_query } from './function_example';
+import { table_valued_function_example_query } from './table_valued_function_example';
+import { trigger_example_query } from './trigger_example';
 
 // All queries in flat structure
 const all_queries = [
@@ -95,7 +107,43 @@ const all_queries = [
   primary_key_example_query,
 
   // FOREIGN KEY example
-  foreign_key_example_query
+  foreign_key_example_query,
+
+  // UNIQUE constraint example
+  unique_constraint_example_query,
+
+  // NOT NULL constraint example
+  not_null_constraint_example_query,
+
+  // CHECK constraint example
+  check_constraint_example_query,
+
+  // CREATE INDEX example
+  create_index_example_query,
+
+  // UNIQUE INDEX example
+  unique_index_example_query,
+
+  // TRANSACTION example
+  transaction_example_query,
+
+  // VIEW example
+  view_example_query,
+
+  // MATERIALIZED VIEW example
+  materialized_view_example_query,
+
+  // STORED PROCEDURE example
+  stored_procedure_example_query,
+
+  // FUNCTION example
+  function_example_query,
+
+  // TABLE-VALUED FUNCTION example
+  table_valued_function_example_query,
+
+  // TRIGGER example
+  trigger_example_query
 ];
 
 // Get ordered list of queries
