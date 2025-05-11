@@ -46,6 +46,7 @@ import { getStudents, getMarks } from './utils/dataLoader';
 import { getOrderedQueries } from './queries';
 import About from './pages/About';
 import Blogs from './pages/Blogs';
+import Python from './pages/Python';
 import { keyframes } from '@emotion/react';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -455,7 +456,17 @@ const QueryDisplay = ({ title, description, sql, explanation }) => (
 );
 
 // Sidebar Component
-const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect }) => {
+const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect, type = 'sql' }) => {
+  const concepts = type === 'python' ? [
+    {
+      id: 1,
+      title: 'Print Statement',
+      description: 'The print statement is one of the most basic and frequently used functions in Python. It allows you to output text and variables to the console.',
+      code: 'print("Hello, World!")\nname = "Python"\nprint(f"Welcome to {name}")',
+      explanation: 'The print() function can output strings, variables, and expressions. You can use f-strings (formatted string literals) to embed variables within strings. The print function automatically adds a newline character at the end of the output.'
+    }
+  ] : queries;
+
   return (
     <div 
       className={`sidebar ${show ? 'show' : ''}`}
@@ -475,7 +486,7 @@ const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect }) =>
       }}
     >
       <div className="p-3 border-bottom border-secondary">
-        <h5 className="mb-0 pt-4">Query Index</h5>
+        <h5 className="mb-0 pt-4">{type === 'python' ? 'Python Concepts' : 'Query Index'}</h5>
       </div>
       <div 
         className="flex-grow-1 overflow-auto"
@@ -499,7 +510,7 @@ const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect }) =>
         }}
       >
         <List className="p-3">
-          {queries.map((query, index) => (
+          {concepts.map((item, index) => (
             <ListItem 
               key={index}
               button
@@ -536,7 +547,7 @@ const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect }) =>
                   flex: 1
                 }}
               >
-                {query.title}
+                {item.title}
               </Typography>
             </ListItem>
           ))}
@@ -561,45 +572,90 @@ const HomeScreen = () => {
         position: 'relative'
       }}
     >
-      <Card
-        component={Link}
-        to="/sql"
-        sx={{
-          maxWidth: 400,
-          backgroundColor: 'rgba(26, 26, 26, 0.8)',
-          backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(79, 195, 247, 0.2)',
-          cursor: 'pointer',
-          '&:hover': {
-            boxShadow: '0 0 20px rgba(79, 195, 247, 0.3)',
-            transform: 'translateY(-5px)',
-            transition: 'all 0.3s ease'
-          }
-        }}
-      >
-        <CardContent>
-          <Typography
-            variant="h5"
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item xs={12} sm={6} md={4}>
+          <Card
+            component={Link}
+            to="/sql"
             sx={{
-              color: '#4fc3f7',
-              fontWeight: 'bold',
-              textAlign: 'center',
-              mb: 2
+              maxWidth: 400,
+              backgroundColor: 'rgba(26, 26, 26, 0.8)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(79, 195, 247, 0.2)',
+              cursor: 'pointer',
+              '&:hover': {
+                boxShadow: '0 0 20px rgba(79, 195, 247, 0.3)',
+                transform: 'translateY(-5px)',
+                transition: 'all 0.3s ease'
+              }
             }}
           >
-            SQL Queries
-          </Typography>
-          <Typography
-            variant="body1"
+            <CardContent>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: '#4fc3f7',
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  mb: 2
+                }}
+              >
+                SQL Queries
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: '#fff',
+                  textAlign: 'center'
+                }}
+              >
+                Explore and learn SQL queries with interactive examples
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Card
+            component={Link}
+            to="/python"
             sx={{
-              color: '#fff',
-              textAlign: 'center'
+              maxWidth: 400,
+              backgroundColor: 'rgba(26, 26, 26, 0.8)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid rgba(79, 195, 247, 0.2)',
+              cursor: 'pointer',
+              '&:hover': {
+                boxShadow: '0 0 20px rgba(79, 195, 247, 0.3)',
+                transform: 'translateY(-5px)',
+                transition: 'all 0.3s ease'
+              }
             }}
           >
-            Explore and learn SQL queries with interactive examples
-          </Typography>
-        </CardContent>
-      </Card>
+            <CardContent>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: '#4fc3f7',
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  mb: 2
+                }}
+              >
+                Python Concepts
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: '#fff',
+                  textAlign: 'center'
+                }}
+              >
+                Master Python programming with comprehensive examples
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
@@ -760,6 +816,7 @@ const App = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isSQLPage = location.pathname === '/sql';
+  const isPythonPage = location.pathname === '/python';
 
   const handleQuerySelect = (index) => {
     setCurrentQueryIndex(index);
@@ -768,6 +825,7 @@ const App = () => {
   const menuItems = [
     { label: 'Home', path: '/' },
     { label: 'SQL Query', path: '/sql' },
+    { label: 'Python', path: '/python' },
     { label: 'About', path: '/about' },
     { label: 'Blogs', path: '/blogs' }
   ];
@@ -829,9 +887,9 @@ const App = () => {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }} />
         
         <Header 
-          menuItems={isSQLPage ? null : menuItems}
-          onMenuClick={isSQLPage ? () => setSidebarShow(!sidebarShow) : null}
-          showSidebarToggle={isSQLPage}
+          menuItems={isSQLPage || isPythonPage ? null : menuItems}
+          onMenuClick={isSQLPage || isPythonPage ? () => setSidebarShow(!sidebarShow) : null}
+          showSidebarToggle={isSQLPage || isPythonPage}
         />
 
         <Box sx={{ 
@@ -847,21 +905,22 @@ const App = () => {
           width: '100%',
           pt: { xs: 0, md: 1 }
         }}>
-          {isSQLPage && (
+          {(isSQLPage || isPythonPage) && (
             <Sidebar 
               show={sidebarShow}
               handleClose={() => setSidebarShow(false)}
               queries={queries}
               currentIndex={currentQueryIndex}
               onQuerySelect={handleQuerySelect}
+              type={isPythonPage ? 'python' : 'sql'}
             />
           )}
 
           <Container 
             sx={{ 
-              marginLeft: { xs: 0, md: sidebarShow && isSQLPage ? '375px' : '0' },
+              marginLeft: { xs: 0, md: sidebarShow && (isSQLPage || isPythonPage) ? '375px' : '0' },
               transition: 'margin-left 0.3s ease',
-              width: { xs: '100%', md: sidebarShow && isSQLPage ? 'calc(100% - 375px)' : '100%' },
+              width: { xs: '100%', md: sidebarShow && (isSQLPage || isPythonPage) ? 'calc(100% - 375px)' : '100%' },
               maxWidth: 'none !important',
               position: 'relative',
               zIndex: 1100,
@@ -880,6 +939,7 @@ const App = () => {
                   setCurrentQueryIndex={setCurrentQueryIndex}
                 />
               } />
+              <Route path="/python" element={<Python />} />
               <Route path="/about" element={<About />} />
               <Route path="/blogs" element={<Blogs />} />
             </Routes>
