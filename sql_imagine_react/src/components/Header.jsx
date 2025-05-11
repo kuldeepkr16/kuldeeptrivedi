@@ -9,10 +9,15 @@ import {
   List,
   ListItem,
   ListItemText,
-  Typography
+  Typography,
+  Stack
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ArticleIcon from '@mui/icons-material/Article';
 
 const Header = ({ menuItems, onMenuClick, showSidebarToggle = false }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,6 +36,29 @@ const Header = ({ menuItems, onMenuClick, showSidebarToggle = false }) => {
   const handleLogoClick = () => {
     navigate('/');
   };
+
+  const socialLinks = [
+    {
+      icon: <YouTubeIcon />,
+      url: 'https://www.youtube.com/@engineerthedata',
+      label: 'YouTube'
+    },
+    {
+      icon: <LinkedInIcon />,
+      url: 'https://www.linkedin.com/in/kuldeep-trivedi-221a1b143/',
+      label: 'LinkedIn'
+    },
+    {
+      icon: <GitHubIcon />,
+      url: 'https://github.com/kuldeepkr16',
+      label: 'GitHub'
+    },
+    {
+      icon: <ArticleIcon />,
+      url: 'https://kuldeepkr16.medium.com/',
+      label: 'Medium'
+    }
+  ];
 
   return (
     <AppBar 
@@ -121,6 +149,41 @@ const Header = ({ menuItems, onMenuClick, showSidebarToggle = false }) => {
               <span style={{ color: '#4fc3f7' }}>TheData</span>
             </Typography>
           </Box>
+
+          {/* Social Media Links */}
+          <Stack 
+            direction="row" 
+            spacing={1}
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center'
+            }}
+          >
+            {socialLinks.map((link, index) => (
+              <IconButton
+                key={index}
+                component="a"
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                sx={{
+                  color: '#4fc3f7',
+                  padding: '8px',
+                  '&:hover': {
+                    color: '#81d4fa',
+                    transform: 'scale(1.1)',
+                    backgroundColor: 'rgba(79, 195, 247, 0.1)'
+                  },
+                  '& .MuiSvgIcon-root': {
+                    fontSize: '1.5rem'
+                  }
+                }}
+              >
+                {link.icon}
+              </IconButton>
+            ))}
+          </Stack>
 
           {menuOpen && menuItems && (
             <Box
