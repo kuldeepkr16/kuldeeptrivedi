@@ -30,6 +30,26 @@ import { lambda_functions_concept } from './lambda_functions';
 import { recursion_concept } from './recursion';
 import { list_comprehension_adv_concept } from './list_comprehension_adv';
 import { dict_comprehension_concept } from './dict_comprehension';
+import { set_data_structure_concept } from './set_data_structure';
+import { set_operations_concept } from './set_operations';
+import { string_formatting_concept } from './string_formatting';
+import { file_io_concept } from './file_io';
+import { exception_handling_concept } from './exception_handling';
+import { custom_exceptions_concept } from './custom_exceptions';
+import { classes_objects_concept } from './classes_objects';
+import { instance_variables_concept } from './instance_variables';
+import { methods_in_classes_concept } from './methods_in_classes';
+import { inheritance_concept } from './inheritance';
+import { polymorphism_concept } from './polymorphism';
+import { encapsulation_concept } from './encapsulation';
+import { abstraction_concept } from './abstraction';
+import { static_methods_concept } from './static_methods';
+import { class_methods_concept } from './class_methods';
+import { modules_packages_concept } from './modules_packages';
+import { importing_modules_concept } from './importing_modules';
+import { regex_concept } from './regex';
+import { decorators_concept } from './decorators';
+import { generators_concept } from './generators';
 
 export const getOrderedPythonConcepts = () => [
   hello_world_concept,
@@ -63,5 +83,25 @@ export const getOrderedPythonConcepts = () => [
   lambda_functions_concept,
   recursion_concept,
   list_comprehension_adv_concept,
-  dict_comprehension_concept
+  dict_comprehension_concept,
+  set_data_structure_concept,
+  set_operations_concept,
+  string_formatting_concept,
+  file_io_concept,
+  exception_handling_concept,
+  custom_exceptions_concept,
+  classes_objects_concept,
+  instance_variables_concept,
+  methods_in_classes_concept,
+  inheritance_concept,
+  polymorphism_concept,
+  encapsulation_concept,
+  abstraction_concept,
+  static_methods_concept,
+  class_methods_concept,
+  modules_packages_concept,
+  importing_modules_concept,
+  regex_concept,
+  decorators_concept,
+  generators_concept
 ]; 
