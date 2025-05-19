@@ -44,9 +44,10 @@ import {
 } from '@mui/icons-material';
 import { getStudents, getMarks } from './utils/dataLoader';
 import { getOrderedQueries } from './queries';
+import { getOrderedPythonConcepts } from './python_concepts';
 import About from './pages/About';
 import Blogs from './pages/Blogs';
-import Python from './pages/Python';
+import PythonView from './pages/PythonView';
 import SQL from './pages/SQL';
 import { keyframes } from '@emotion/react';
 import Header from './components/Header';
@@ -457,17 +458,7 @@ const QueryDisplay = ({ title, description, sql, explanation }) => (
 );
 
 // Sidebar Component
-const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect, type = 'sql' }) => {
-  const concepts = type === 'python' ? [
-    {
-      id: 1,
-      title: 'Print Statement',
-      description: 'The print statement is one of the most basic and frequently used functions in Python. It allows you to output text and variables to the console.',
-      code: 'print("Hello, World!")\nname = "Python"\nprint(f"Welcome to {name}")',
-      explanation: 'The print() function can output strings, variables, and expressions. You can use f-strings (formatted string literals) to embed variables within strings. The print function automatically adds a newline character at the end of the output.'
-    }
-  ] : queries;
-
+const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect }) => {
   return (
     <div 
       className={`sidebar ${show ? 'show' : ''}`}
@@ -487,7 +478,7 @@ const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect, type
       }}
     >
       <div className="p-3 border-bottom border-secondary">
-        <h5 className="mb-0 pt-4">{type === 'python' ? 'Python Concepts' : 'Query Index'}</h5>
+        <h5 className="mb-0 pt-4">Query Index</h5>
       </div>
       <div 
         className="flex-grow-1 overflow-auto"
@@ -511,7 +502,7 @@ const Sidebar = ({ show, handleClose, queries, currentIndex, onQuerySelect, type
         }}
       >
         <List className="p-3">
-          {concepts.map((item, index) => (
+          {queries.map((item, index) => (
             <ListItem 
               key={index}
               button
@@ -665,7 +656,9 @@ const HomeScreen = () => {
 const App = () => {
   const [sidebarShow, setSidebarShow] = useState(false);
   const [currentQueryIndex, setCurrentQueryIndex] = useState(0);
+  const [currentPythonConceptIndex, setCurrentPythonConceptIndex] = useState(0);
   const queries = useMemo(() => getOrderedQueries(), []);
+  const pythonConcepts = useMemo(() => getOrderedPythonConcepts(), []);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isSQLPage = location.pathname === '/sql';
@@ -673,6 +666,9 @@ const App = () => {
 
   const handleQuerySelect = (index) => {
     setCurrentQueryIndex(index);
+  };
+  const handlePythonConceptSelect = (index) => {
+    setCurrentPythonConceptIndex(index);
   };
 
   const menuItems = [
@@ -759,13 +755,12 @@ const App = () => {
           pt: { xs: 0, md: 1 }
         }}>
           {(isSQLPage || isPythonPage) && (
-            <Sidebar 
+            <Sidebar
               show={sidebarShow}
               handleClose={() => setSidebarShow(false)}
-              queries={queries}
-              currentIndex={currentQueryIndex}
-              onQuerySelect={handleQuerySelect}
-              type={isPythonPage ? 'python' : 'sql'}
+              queries={isPythonPage ? pythonConcepts : queries}
+              currentIndex={isPythonPage ? currentPythonConceptIndex : currentQueryIndex}
+              onQuerySelect={isPythonPage ? handlePythonConceptSelect : handleQuerySelect}
             />
           )}
 
@@ -792,7 +787,13 @@ const App = () => {
                   setCurrentQueryIndex={setCurrentQueryIndex}
                 />
               } />
-              <Route path="/python" element={<Python />} />
+              <Route path="/python" element={
+                <PythonView
+                  concepts={pythonConcepts}
+                  currentConceptIndex={currentPythonConceptIndex}
+                  setCurrentConceptIndex={setCurrentPythonConceptIndex}
+                />
+              } />
               <Route path="/about" element={<About />} />
               <Route path="/blogs" element={<Blogs />} />
             </Routes>
