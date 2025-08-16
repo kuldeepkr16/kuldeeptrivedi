@@ -1,28 +1,58 @@
 import React from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, CardHeader } from '@mui/material';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { Box, Typography, Container, List, ListItem, ListItemText, ListItemButton, Divider } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const Blogs = () => {
   const blogPosts = [
     {
-      title: 'Getting Started with SQL Queries',
-      date: 'March 15, 2024',
-      excerpt: 'Learn the basics of SQL queries and how to write your first SELECT statement.'
+      title: 'How I Optimised a 13 Million Row PostgreSQL Migration',
+      url: 'https://kuldeepkr16.medium.com/how-i-optimised-a-13-million-row-postgresql-migration-29ba91cedc8d',
+      excerpt: 'Learn about optimizing large-scale PostgreSQL migrations with practical strategies and performance improvements.'
     },
     {
-      title: 'Advanced SQL Joins Explained',
-      date: 'March 10, 2024',
-      excerpt: 'A comprehensive guide to understanding different types of SQL joins and when to use them.'
+      title: 'DynamoDB Tables to Postgres Data Pipeline',
+      url: 'https://kuldeepkr16.medium.com/dynamodb-tables-to-postgres-data-pipeline-4820b4af149b',
+      excerpt: 'Building efficient data pipelines from DynamoDB to PostgreSQL with best practices and optimization techniques.'
     },
     {
-      title: 'SQL Best Practices for Beginners',
-      date: 'March 5, 2024',
-      excerpt: 'Essential tips and tricks to write efficient and maintainable SQL queries.'
+      title: 'Embedding QuickSight Dashboards with Flask',
+      url: 'https://kuldeepkr16.medium.com/embedding-quicksight-dashboards-with-flask-ef4c271e2d4c',
+      excerpt: 'Integrate AWS QuickSight dashboards into Flask applications for seamless data visualization.'
     },
     {
-      title: 'Understanding SQL Subqueries',
-      date: 'February 28, 2024',
-      excerpt: 'Master the art of using subqueries to solve complex data retrieval problems.'
+      title: 'How to Prepare for a Data Analyst Interview',
+      url: 'https://kuldeepkr16.medium.com/how-to-prepare-for-a-data-analyst-interview-a3f824994404',
+      excerpt: 'Comprehensive guide to ace your data analyst interview with technical and behavioral preparation tips.'
+    },
+    {
+      title: 'How We Reduced Sync Costs by 60% Using Incremental Strategy',
+      url: 'https://kuldeepkr16.medium.com/how-we-reduced-sync-costs-by-60-using-incremental-strategy-039cabcdb7fb',
+      excerpt: 'Cost optimization strategies for data synchronization using incremental approaches and smart engineering.'
+    },
+    {
+      title: 'Investing with Project Kuber',
+      url: 'https://kuldeepkr16.medium.com/investing-with-project-kuber-c4dabacf2808',
+      excerpt: 'Exploring investment strategies and insights through the Project Kuber framework.'
+    },
+    {
+      title: 'Query Optimization PostgreSQL',
+      url: 'https://kuldeepkr16.medium.com/query-optimization-postgresql-9e616d9dc685',
+      excerpt: 'Advanced PostgreSQL query optimization techniques for better database performance.'
+    },
+    {
+      title: 'Redline a Redshift Pipeline',
+      url: 'https://kuldeepkr16.medium.com/redline-a-redshift-pipeline-ca07d5e1ddcb',
+      excerpt: 'Building and optimizing Amazon Redshift data pipelines for high-performance analytics.'
+    },
+    {
+      title: 'Unlocking the Power of Table-Valued Functions in PostgreSQL',
+      url: 'https://kuldeepkr16.medium.com/unlocking-the-power-of-table-valued-functions-in-postgresql-5eb6a15dd85f',
+      excerpt: 'Deep dive into PostgreSQL table-valued functions and their practical applications in data engineering.'
+    },
+    {
+      title: 'Automate Materialized View Refresh',
+      url: 'https://kuldeepkr16.medium.com/automate-materialized-view-refresh-eed94c1973b1',
+      excerpt: 'Automating PostgreSQL materialized view refreshes for optimal data freshness and performance.'
     }
   ];
 
@@ -30,30 +60,51 @@ const Blogs = () => {
     <Container maxWidth="lg">
       <Box sx={{ mt: 4, mb: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          SQL Learning Blog
+          Data Engineering Articles
         </Typography>
-        <Grid container spacing={3}>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+          Explore my latest articles on data engineering, PostgreSQL optimization, AWS services, and data pipeline best practices.
+        </Typography>
+        
+        <List sx={{ bgcolor: 'background.paper' }}>
           {blogPosts.map((post, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <CardHeader
-                  title={post.title}
-                  subheader={
-                    <Box sx={{ display: 'flex', alignItems: 'center', color: 'text.secondary' }}>
-                      <CalendarTodayIcon sx={{ mr: 1, fontSize: '1rem' }} />
-                      {post.date}
-                    </Box>
-                  }
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="body2" color="text.secondary">
-                    {post.excerpt}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <React.Fragment key={index}>
+              <ListItem disablePadding sx={{ mb: 1 }}>
+                <ListItemButton 
+                  href={post.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  sx={{ 
+                    py: 2,
+                    px: 2,
+                    borderRadius: 1,
+                    '&:hover': {
+                      backgroundColor: 'rgba(25, 118, 210, 0.16)',
+                      transition: 'background-color 0.2s ease'
+                    }
+                  }}
+                >
+                  <ListItemText
+                    primary={
+                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                          {post.title}
+                        </Typography>
+                        <LaunchIcon sx={{ ml: 1, color: 'primary.main' }} />
+                      </Box>
+                    }
+                    secondary={
+                      <Typography variant="body2" color="text.secondary">
+                        {post.excerpt}
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+              {index < blogPosts.length - 1 && <Divider sx={{ my: 1 }} />}
+            </React.Fragment>
           ))}
-        </Grid>
+        </List>
       </Box>
     </Container>
   );
